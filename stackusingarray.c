@@ -111,6 +111,10 @@ void display() {
 void cleanup() {
     free(stack);
 }
+// Check if stack is full
+int isFull() {
+    return top == capacity - 1;
+}
 
 int main() {
     int choice, size;
@@ -126,7 +130,7 @@ int main() {
 
     while (1) {
         printf("\n--- Stack Menu ---\n");
-        printf("1. Push (Integer or Word)\n2. Pop\n3. Peek\n4. Display\n5. Exit\n");
+        printf("1. Push (Integer or Word)\n2. Pop\n3. Peek\n4. Display\n5. IS EMPTY OR NOT\n6. STACK FULL OR NOT\n7. Exit\n");
         printf("Enter your choice: ");
         if (scanf("%d", &choice) != 1) {
             printf("Invalid input. Try again.\n");
@@ -178,11 +182,26 @@ int main() {
         case 4:
             display();
             break;
+        case 5: {
+            if (isEmpty())
+                printf("Yes, the stack is empty.\n");
+            else
+                printf("No, the stack is not empty.\n");
+            break;
+        }
 
-        case 5:
+        case 6: {
+            if (isFull())
+                printf("Yes, the stack is full.\n");
+            else
+                printf("No, the stack is not full.\n");
+            break;
+        }  
+        case 7: {
             printf("Exiting program.\n");
             cleanup();
             return 0;
+        }
 
         default:
             printf("Invalid choice. Try again.\n");
